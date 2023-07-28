@@ -1,16 +1,16 @@
 packer {
   required_plugins {
-    ansible = {
-      source  = "github.com/hashicorp/ansible"
-      version = "~> 1"
-    }
     vmware = {
       source  = "github.com/hashicorp/vmware"
       version = "~> 1"
     }
     qemu = {
-      version = "~> 1.0"
       source  = "github.com/hashicorp/qemu"
+      version = "~> 1"
+    }
+    ansible = {
+      source  = "github.com/hashicorp/ansible"
+      version = "~> 1"
     }
   }
 }
@@ -101,16 +101,16 @@ source "qemu" "debian11" {
   boot_wait        = "${var.boot_wait}"
   communicator     = "none"
   disk_size        = "4G"
+  memory           = 2048
   headless         = true
   http_directory   = "http"
   iso_checksum     = "none"
   iso_url          = "${var.iso_url}"
   shutdown_command = "echo 'packer'|sudo -S shutdown -P now"
+  ssh_username     = "${var.ssh_username}"
   ssh_password     = "${var.ssh_password}"
   ssh_port         = 22
   ssh_timeout      = "30m"
-  ssh_username     = "${var.ssh_username}"
-  memory           = 2048
   qemuargs         = [["-serial", "stdio"]]
   shutdown_timeout = "1h"
 }
@@ -123,7 +123,7 @@ build {
     inline          = ["apt -y update && apt -y upgrade", "apt -y install python3-pip", "pip3 --no-cache-dir install ansible"]
   }
 
-  provisioner "ansible-local" {
+  provisioner "ansible" {
     playbook_file = "scripts/setup.yml"
   }
 
