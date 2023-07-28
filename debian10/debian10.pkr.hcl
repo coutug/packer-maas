@@ -10,35 +10,35 @@ packer {
 
 variable "filename" {
   type        = string
-  default     = "centos8.tar.gz"
+  default     = "rhel9.tar.gz"
   description = "The filename of the tarball to produce"
 }
 
-variable "centos8_iso_url" {
+variable "rhel9_iso_path" {
   type    = string
-  default = "https://mirrors.edge.kernel.org/centos/8.4.2105/isos/x86_64/CentOS-8.4.2105-x86_64-boot.iso"
+  default = "${env("RHEL9_ISO_PATH")}"
 }
 
-source "qemu" "centos8" {
-  boot_command     = ["<up><tab> ", "inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos8.ks ", "console=ttyS0 inst.cmdline", "<enter>"]
+source "qemu" "debian10" {
+  boot_command     = ["<up><tab> ", "inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/rhel9.ks ", "console=ttyS0 inst.cmdline", "<enter>"]
   boot_wait        = "3s"
   communicator     = "none"
   disk_size        = "4G"
   headless         = true
   http_directory   = "http"
   iso_checksum     = "none"
-  iso_url          = var.centos8_iso_url
+  iso_url          = var.rhel9_iso_path
   memory           = 2048
-  qemuargs         = [["-serial", "stdio"]]
+  qemuargs         = [["-serial", "stdio"], ["-cpu", "host"]]
   shutdown_timeout = "1h"
 }
 
 build {
-  sources = ["source.qemu.centos8"]
+  sources = ["source.qemu.rhel9"]
 
   post-processor "shell-local" {
     inline = [
-      "SOURCE=centos8",
+      "SOURCE=rhel9",
       "OUTPUT=${var.filename}",
       "source ../scripts/fuse-nbd",
       "source ../scripts/fuse-tar-root"
