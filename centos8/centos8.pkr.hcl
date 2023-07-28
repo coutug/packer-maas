@@ -16,7 +16,7 @@ variable "filename" {
 
 variable "centos8_iso_url" {
   type    = string
-  default = "https://mirrors.edge.kernel.org/centos/8.5.2111/isos/x86_64/CentOS-8.5.2111-x86_64-boot.iso"
+  default = "https://mirror.mtl2.ca.leaseweb.net/centos/8-stream/isos/x86_64/CentOS-Stream-8-20230710.0-x86_64-boot.iso"
 }
 
 source "qemu" "centos8" {
