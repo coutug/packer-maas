@@ -105,13 +105,8 @@ source "qemu" "debian11" {
   http_directory   = "http"
   iso_checksum     = "none"
   iso_url          = "${var.iso_url}"
-  shutdown_command = "echo 'packer'|sudo -S shutdown -P now"
-  ssh_username     = "${var.ssh_username}"
-  ssh_password     = "${var.ssh_password}"
-  ssh_port         = 22
-  ssh_timeout      = "30m"
   qemuargs         = [["-serial", "stdio"]]
-  shutdown_timeout = "1h"
+  shutdown_timeout = "40m"
 }
 
 build {
