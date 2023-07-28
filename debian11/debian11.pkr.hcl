@@ -1,16 +1,16 @@
 packer {
   required_plugins {
     vmware = {
-      source  = "github.com/hashicorp/vmware"
       version = "~> 1"
+      source  = "github.com/hashicorp/vmware"
     }
     qemu = {
-      source  = "github.com/hashicorp/qemu"
       version = "~> 1"
+      source  = "github.com/hashicorp/qemu"
     }
     ansible = {
-      source  = "github.com/hashicorp/ansible"
       version = "~> 1"
+      source  = "github.com/hashicorp/ansible"
     }
   }
 }
@@ -123,7 +123,7 @@ build {
     inline          = ["apt -y update && apt -y upgrade", "apt -y install python3-pip", "pip3 --no-cache-dir install ansible"]
   }
 
-  provisioner "ansible" {
+  provisioner "ansible-local" {
     playbook_file = "scripts/setup.yml"
   }
 
