@@ -20,7 +20,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 PACKER_OUTPUT=output-${SOURCE:-qemu}/packer-${SOURCE:-qemu}
-IMG_FMT=${IMG_FMT:-qcow2}
+IMG_FMT=${IMG_FMT:-raw}
 
 if [ ! -f "${PACKER_OUTPUT}" ]; then
     echo "ERROR: Not in the same path as template!" >&2
