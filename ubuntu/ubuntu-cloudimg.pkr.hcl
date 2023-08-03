@@ -82,13 +82,6 @@ build {
     scripts          = ["${path.root}/scripts/cloudimg/setup-boot.sh"]
   }
 
-
-  provisioner "shell" {
-    environment_vars  = concat(local.proxy_env, ["DEBIAN_FRONTEND=noninteractive"])
-    expect_disconnect = true
-    scripts           = [var.customize_script]
-  }
-
   provisioner "shell" {
     environment_vars = [
       "CLOUDIMG_CUSTOM_KERNEL=${var.kernel}",
@@ -105,6 +98,12 @@ build {
   provisioner "shell" {
     environment_vars = ["CLOUDIMG_CUSTOM_KERNEL=${var.kernel}"]
     scripts          = ["${path.root}/scripts/cloudimg/setup-curtin.sh"]
+  }
+
+  provisioner "shell" {
+    environment_vars  = concat(local.proxy_env, ["DEBIAN_FRONTEND=noninteractive"])
+    expect_disconnect = true
+    scripts           = [var.customize_script]
   }
 
   provisioner "shell" {
