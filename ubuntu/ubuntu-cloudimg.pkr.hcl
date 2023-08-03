@@ -101,12 +101,6 @@ build {
   }
 
   provisioner "shell" {
-    environment_vars  = concat(local.proxy_env, ["DEBIAN_FRONTEND=noninteractive"])
-    expect_disconnect = true
-    scripts           = [var.customize_script]
-  }
-
-  provisioner "shell" {
     environment_vars = ["DEBIAN_FRONTEND=noninteractive"]
     scripts          = ["${path.root}/scripts/cloudimg/cleanup.sh"]
   }
