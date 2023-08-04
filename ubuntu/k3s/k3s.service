@@ -1,9 +1,8 @@
 [Unit]
 Description=k3s Kubernetes cluster
-After=network-online.target rsyslog.service google-guest-agent.service
-Wants=network-online.target rsyslog.service
-After=cloud-final.service multi-user.target
-Wants=cloud-final.service
+Wants=network-online.target
+After=network-online.target
+
 
 [Service]
 Type=notify
