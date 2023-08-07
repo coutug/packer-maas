@@ -121,6 +121,11 @@ build {
     scripts          = ["${path.root}/scripts/cloudimg/cleanup.sh"]
   }
 
+  provisioner "shell" {
+    environment_vars = ["DEBIAN_FRONTEND=noninteractive"]
+    inline = ["/usr/local/bin/k3s-start.sh"]
+  }
+
   post-processor "shell-local" {
     inline = [
       "IMG_FMT=qcow2",
@@ -128,8 +133,7 @@ build {
       "ROOT_PARTITION=1",
       "OUTPUT=${var.filename}",
       "source ../scripts/fuse-nbd",
-      "source ../scripts/fuse-tar-root",
-      "/usr/local/bin/k3s-start.sh"
+      "source ../scripts/fuse-tar-root"
     ]
     inline_shebang = "/bin/bash -e"
   }
