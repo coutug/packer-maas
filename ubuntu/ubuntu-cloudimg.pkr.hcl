@@ -124,15 +124,15 @@ build {
   // provisioner "shell" {
   //   environment_vars = ["DEBIAN_FRONTEND=noninteractive"]
   //   inline = [
-  //     "chmod +x /usr/local/bin/k3s-start.sh",
   //     "/usr/local/bin/k3s-start.sh"
   //   ]
   // }
 
   provisioner "shell" {
     inline = [
-      "sudo systemctl daemon-reload",
-      "sudo systemctl enable k3s.service"
+      "chmod +x /usr/local/bin/k3s-start.sh",
+      "systemctl daemon-reload",
+      "systemctl enable k3s.service"
     ]
   }
 
