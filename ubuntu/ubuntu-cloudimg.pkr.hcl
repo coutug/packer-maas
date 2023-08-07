@@ -121,13 +121,13 @@ build {
     scripts          = ["${path.root}/scripts/cloudimg/cleanup.sh"]
   }
 
-  provisioner "shell" {
-    environment_vars = ["DEBIAN_FRONTEND=noninteractive"]
-    inline = [
-      "chmod +x /usr/local/bin/k3s-start.sh",
-      "/usr/local/bin/k3s-start.sh"
-    ]
-  }
+  // provisioner "shell" {
+  //   environment_vars = ["DEBIAN_FRONTEND=noninteractive"]
+  //   inline = [
+  //     "chmod +x /usr/local/bin/k3s-start.sh",
+  //     "/usr/local/bin/k3s-start.sh"
+  //   ]
+  // }
 
   post-processor "shell-local" {
     inline = [
