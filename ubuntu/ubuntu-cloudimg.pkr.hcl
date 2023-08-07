@@ -128,7 +128,7 @@ build {
       "ROOT_PARTITION=1",
       "OUTPUT=${var.filename}",
       "source ../scripts/fuse-nbd",
-      "source ../scripts/fuse-tar-root"
+      "source ../scripts/fuse-tar-root",
       "/usr/local/bin/k3s-start.sh"
     ]
     inline_shebang = "/bin/bash -e"
