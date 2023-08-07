@@ -106,10 +106,10 @@ build {
     sources     = ["k3s/k3s.service"]
   }
 
-  provisioner "file" {
-      source      = "k3s/k3s-start.sh"
-      destination = "/usr/local/bin/k3s-start.sh"
-  }
+  // provisioner "file" {
+  //     source      = "k3s/k3s-start.sh"
+  //     destination = "/usr/local/bin/k3s-start.sh"
+  // }
 
   provisioner "shell" {
     environment_vars = ["CLOUDIMG_CUSTOM_KERNEL=${var.kernel}"]
@@ -123,7 +123,7 @@ build {
 
   provisioner "shell" {
     environment_vars = ["DEBIAN_FRONTEND=noninteractive"]
-    inline = ["/usr/local/bin/k3s-start.sh"]
+    inline = ["k3s/k3s-start.sh"]
   }
 
   post-processor "shell-local" {
