@@ -3,6 +3,8 @@ Description=k3s Kubernetes cluster
 Wants=network-online.target
 After=network-online.target
 
+[Install]
+WantedBy=multi-user.target
 
 [Service]
 Type=notify
